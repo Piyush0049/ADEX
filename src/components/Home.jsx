@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import InfoSection from './Trust';
-import { BsQrCode, BsList } from "react-icons/bs";
+import { BsQrCode } from "react-icons/bs";
 import Popup from './Popup';
 import AccountSection from './Openacc';
 import TradeZoneSection from './TradeZone';
 import TrustedTrading from './TrustedTrading';
-import { IoClose } from "react-icons/io5";
 
 function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -28,11 +26,6 @@ function Home() {
         setIsPopupOpen(false);
     };
 
-    const handleSidebarToggle = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
-
-    const isMobileView = windowWidth < 670;
 
     const styles = {
         container: {
@@ -116,7 +109,7 @@ function Home() {
             marginBottom: '20px',
         },
         headline: {
-            fontSize: '55px',
+            fontSize: windowWidth > 443 ? '55px' : "40px",
             fontWeight: '800',
             lineHeight: '1.2',
             marginBottom: '20px',
@@ -170,146 +163,32 @@ function Home() {
         imageHover: {
             transform: 'scale(1.05)',
         },
-        sidebar: {
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '300px',
-            height: '100%',
-            background: 'linear-gradient(145deg, rgba(76, 40, 137, 0.9), rgba(24, 231, 243, 0.5))',
-            color: '#fff',
-            padding: '20px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
-            transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
-            transition: 'transform 0.5s ease-in-out, opacity 0.3s ease', // Added opacity transition
-            zIndex: 1001,
-            backdropFilter: 'blur(10px)',
-            borderRight: '1px solid rgba(255, 255, 255, 0.2)',
-            overflowY: 'auto',
-            opacity: isSidebarOpen ? '1' : '0', // Added opacity for smooth fading
-        },
-        sidebarLink: {
-            display: 'block',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '20px',
-            margin: '20px 0',
-            padding: '15px 10px',
-            borderRadius: '10px', // Rounded corners for the links
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', // Semi-transparent background for links
-            transition: 'background-color 0.3s ease, padding-left 0.3s ease', // Smooth transition for hover effects
-        },
-        sidebarLinkHover: {
-            backgroundColor: 'rgba(24, 231, 243, 0.2)', // Subtle color change on hover
-            paddingLeft: '20px', // Left padding on hover
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)', // Adds a subtle shadow effect on hover
-        },
-        closeSidebar: {
-            fontSize: '24px',
-            cursor: 'pointer',
-            color: '#fff',
-            marginTop: '20px',
-            transition: 'background-color 0.3s ease, transform 0.3s ease', // Smooth hover effect for the close button
-        },
-        closeSidebarHover: {
-            backgroundColor: 'rgba(255, 255, 255, 0.3)', // Hover effect for the close button
-            transform: 'rotate(90deg)', // Rotate effect for close button on hover
-        },
-        hamburger: {
-            fontSize: "15px" // Hide hamburger for larger screens
-        },
-        '@media (max-width: 670px)': {
-            header: {
-                padding: '20px',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-            },
-            nav: {
-                display: 'none',
-            },
-            hamburger: {
-                display: 'block', // Show hamburger for mobile view
-            },
-        },
     };
 
     return (
         <div style={styles.container}>
             <div style={styles.background} />
             <header style={styles.header}>
-                {isMobileView && (
-                    <nav style={styles.nav}>
-                        <div style={{ ...styles.hamburger, fontSize: '30px' }} onClick={handleSidebarToggle}>
-                            <BsList />
-                        </div>
-                    </nav>
-                )}
                 <img
                     src="../assets/images/Fastone-pngLogo.png"
                     alt="Hero"
-                    style={{ width: windowWidth > 990 ? '5%' : windowWidth > 682 ?  "10%" : "15%", height: 'auto', ...styles.imageHover }}
+                    style={{ width: windowWidth > 990 ? '5%' : windowWidth > 682 ? "10%" : "15%", height: 'auto', ...styles.imageHover }}
                 />
-                {!isMobileView && (
-                    <nav style={styles.nav}>
-                        {['Home', 'Trading', 'Tools', 'Insights', 'Talk to us'].map((item) => (
-                            <a
-                                key={item}
-                                href={`#${item.toLowerCase().replace(/\s+/g, '')}`}
-                                style={styles.navLink}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.querySelector('span').style.width = '100%';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.querySelector('span').style.width = '0%';
-                                }}
-                            >
-                                {item}
-                                <span style={styles.navLinkBefore}></span>
-                            </a>
-                        ))}
-                    </nav>
-                )}
-            </header>
-            {isMobileView && isSidebarOpen && (
-                <div style={styles.sidebar}>
-                    <button
-                        style={styles.closeSidebar}
-                        onClick={handleSidebarToggle}
-                        onMouseEnter={(e) => (e.currentTarget.style.transform = 'rotate(90deg)')}
-                        onMouseLeave={(e) => (e.currentTarget.style.transform = 'rotate(0deg)')}
-                    >
-                        <IoClose />
-                    </button>
 
-                    {['Home', 'Trading', 'Tools', 'Insights', 'Talk to us'].map((item) => (
-                        <a
-                            key={item}
-                            href={`#${item.toLowerCase().replace(/\s+/g, '')}`}
-                            style={styles.sidebarLink}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(24, 231, 243, 0.2)';
-                                e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
-                                e.currentTarget.style.paddingLeft = '20px';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-                                e.currentTarget.style.boxShadow = 'none';
-                                e.currentTarget.style.paddingLeft = '10px';
-                            }}
-                        >
-                            {item}
-                        </a>
-                    ))}
-                </div>
-            )}
+            </header>
+
 
             <main style={styles.main}>
                 <section style={styles.textSection}>
                     <h1 style={styles.headline}>
-                        Discover the <span style={styles.highlight}>Best</span> Solutions
+                        Explore <span style={styles.highlight}>FastOne</span> Markets
                     </h1>
                     <p style={styles.description}>
-                        Explore our range of services and find the perfect fit for your needs. Whether you're looking for a day pass or a dedicated office space, we have flexible options tailored for you.
+                        Super Fast execution<br/>
+                        Super Fast Customer Service<br/>
+                        Super Fast payments and withdrawals<br/>
+                        Coming Soon - Register your interest today.
+
                     </p>
                     <div style={styles.buttonContainer}>
                         <button
@@ -320,17 +199,7 @@ function Home() {
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
-                            Sign up
-                        </button>
-                        <button
-                            style={{ ...styles.button, ...styles.loginButton }}
-                            onClick={() => {
-                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                        >
-                            Login
+                            Register Today
                         </button>
                     </div>
                 </section>

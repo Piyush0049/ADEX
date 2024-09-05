@@ -11,6 +11,9 @@ const InfoSection = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+
+
+
     const sectionStyle = {
         backgroundColor: '#ffffff',
         padding: '64px 32px',
@@ -30,7 +33,7 @@ const InfoSection = () => {
 
     const cardContainerStyle = {
         display: 'flex',
-        flexDirection : windowWidth > 830 ? "row" : "column",
+        flexDirection: windowWidth > 830 ? "row" : "column",
         justifyContent: 'center',
         gap: '24px',
         alignItems: 'center',
@@ -99,7 +102,7 @@ const InfoSection = () => {
                 Trust. Confidence. Transparency.
             </div>
             <p style={subheadingStyle}>
-                Find out why so many CFD traders are choosing us.
+                There’s a reason why so many traders have been choosing us.
             </p>
 
             <div style={cardContainerStyle}>
@@ -113,6 +116,9 @@ const InfoSection = () => {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <button
+                        onClick={() => {
+                            window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                        }}
                             style={buttonStyle}
                             onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                             onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
@@ -133,14 +139,26 @@ const InfoSection = () => {
                         <h2 style={cardTitleStyle}>
                             Learn why traders made the move to us
                         </h2>
-                        <p style={{ ...cardTextStyle, color: '#718096' }}>Trustpilot</p>
+                        <br />
                     </div>
-                    <div style={{ display: 'flex', justifyContent: "end", alignItems: 'center' }}>
-                        <img
-                            src="../assets/images/eightcaplap-650x650.png.webp" // Replace with the actual image path
-                            alt="Trustpilot icon"
-                            style={imageStyle}
-                        />
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <button
+                            style={{ ...buttonStyle, ...buttonHoverStyle }}
+                            onClick={() => {
+                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                        >
+                            Register Today
+                        </button>
+                        <div style={{ display: 'flex', justifyContent: "end", alignItems: 'center' }}>
+                            <img
+                                src="../assets/images/eightcaplap-650x650.png.webp" // Replace with the actual image path
+                                alt="Trustpilot icon"
+                                style={imageStyle}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

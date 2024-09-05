@@ -26,12 +26,6 @@ const TrustedTrading = () => {
         marginBottom: '8px',
     };
 
-    const subheadingStyle = {
-        color: '#718096',
-        fontSize: '1.125rem',
-        marginBottom: '48px',
-    };
-
     const cardStyle = {
         background: 'linear-gradient(135deg, black, grey)', 
         color: '#ffffff',
@@ -96,6 +90,9 @@ const TrustedTrading = () => {
                         Enjoy the power of MT4 & MT5 trading platforms. Advanced charting, expert advisors, and custom signals.
                     </p>
                     <button
+                    onClick={() => {
+                        window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                    }}
                         style={buttonStyle}
                         onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                         onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#fff')}

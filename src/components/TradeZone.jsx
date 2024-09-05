@@ -100,6 +100,9 @@ const TradeZoneSection = () => {
                         style={buttonStyle}
                         onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                         onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#fff')}
+                        onClick={() => {
+                            window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                        }}
                     >
                         Book a seat
                     </button>
