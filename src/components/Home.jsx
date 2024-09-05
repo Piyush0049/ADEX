@@ -187,7 +187,7 @@ function Home() {
                         Super Fast execution<br/>
                         Super Fast Customer Service<br/>
                         Super Fast payments and withdrawals<br/>
-                        Coming Soon - Register your interest today.
+                        Register your interest today.
 
                     </p>
                     <div style={styles.buttonContainer}>

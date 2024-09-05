@@ -1,16 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 
 const Footer = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <footer
@@ -52,25 +42,18 @@ const Footer = () => {
       </div>
       <div
         style={{
-          maxWidth: '1280px',
-          margin: '3rem auto 0',
+          width : "100%"
+,          margin: '3rem auto 0',
           paddingTop: '2rem',
           borderTop: '1px solid #9ca3af',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'center',
           padding: '0 1.5rem',
           fontFamily: 'Poppins, sans-serif',
         }}
       >
-        {windowWidth > 611 && (
-          <img
-            src="../assets/images/Fastone-pngLogo.png"
-            alt="Hero"
-            style={{ width: windowWidth > 990 ? '6%' : '10%', height: 'auto', paddingTop: '5px' }}
-          />
-        )}
-        <p style={{ color: '#d1d5db', fontSize: '0.875rem' }}>
+        <p style={{ color: '#d1d5db', fontSize: '0.875rem', paddingTop : "20px" }}>
           © 2024 FastOne Global Financial Markets. All rights reserved.
         </p>
       </div>
