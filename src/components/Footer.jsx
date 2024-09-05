@@ -1,16 +1,26 @@
 import React from 'react';
-
+import { useState, useEffect } from 'react';
 const Footer = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
   return (
-    <footer style={{ backgroundColor: '#f9fafb', padding: '3rem 0' }}>
+    <footer style={{ background: 'linear-gradient(135deg, #6b7280, #4b5563)', padding: '4rem 0', color: '#fff', fontFamily: 'Poppins, sans-serif', borderTop: '1px solid #e5e7eb' }}>
       <div
         style={{
           maxWidth: '1280px',
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '2rem',
-          padding: '0 1rem',
+          gap: '2.5rem',
+          padding: '0 1.5rem',
         }}
       >
         {[
@@ -55,9 +65,9 @@ const Footer = () => {
             <h4
               style={{
                 fontWeight: '700',
-                fontSize: '1.25rem',
-                marginBottom: '1rem',
-                color: '#111827',
+                fontSize: '1.375rem',
+                marginBottom: '1.5rem',
+                color: '#f3f4f6',
               }}
             >
               {section.title}
@@ -65,24 +75,23 @@ const Footer = () => {
             {section.links && (
               <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
                 {section.links.map((link, i) => (
-                  <li key={i} style={{ marginBottom: '0.75rem' }}>
+                  <li key={i} style={{ marginBottom: '0.85rem' }}>
                     <a
                       href="#"
                       style={{
-                        color: '#6b7280',
+                        color: '#d1d5db',
                         textDecoration: 'none',
                         transition: 'color 0.3s ease, transform 0.3s ease',
                         cursor: 'pointer',
-                        display: 'block',
-                        fontSize: '0.9375rem',
+                        fontSize: '0.95rem',
                       }}
                       onClick={(e) => e.preventDefault()}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = '#111827';
-                        e.currentTarget.style.transform = 'translateX(4px)';
+                        e.currentTarget.style.color = '#ffffff';
+                        e.currentTarget.style.transform = 'translateX(6px)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.color = '#6b7280';
+                        e.currentTarget.style.color = '#d1d5db';
                         e.currentTarget.style.transform = 'translateX(0)';
                       }}
                     >
@@ -98,8 +107,8 @@ const Footer = () => {
                   display: 'flex',
                   listStyleType: 'none',
                   padding: '0',
-                  margin: '0',
-                  gap: '1rem',
+                  marginTop: '1.5rem',
+                  gap: '1.2rem',
                 }}
               >
                 {section.social.map((social, i) => (
@@ -107,17 +116,17 @@ const Footer = () => {
                     <a
                       href={social.link}
                       style={{
-                        color: '#6b7280',
+                        color: '#d1d5db',
                         textDecoration: 'none',
                         transition: 'color 0.3s ease, transform 0.3s ease',
-                        fontSize: '1.25rem',
+                        fontSize: '1.5rem',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.color = '#111827';
-                        e.currentTarget.style.transform = 'scale(1.15)';
+                        e.currentTarget.style.color = '#18e7f3';
+                        e.currentTarget.style.transform = 'scale(1.2)';
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.color = '#6b7280';
+                        e.currentTarget.style.color = '#d1d5db';
                         e.currentTarget.style.transform = 'scale(1)';
                       }}
                     >
@@ -133,24 +142,26 @@ const Footer = () => {
       <div
         style={{
           maxWidth: '1280px',
-          margin: '2.5rem auto 0',
-          paddingTop: '1.5rem',
-          borderTop: '1px solid #e5e7eb',
+          margin: '3rem auto 0',
+          paddingTop: '2rem',
+          borderTop: '1px solid #9ca3af',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 1rem',
+          padding: '0 1.5rem',
+          fontFamily: 'Poppins, sans-serif',
         }}
       >
-        <div style={{
-          fontSize: '32px',
-          fontWeight: 'bold',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          color: '#18e7f3',
-        }}>Adex</div>
-        <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-          © 2024 Your Company. All rights reserved.
+        {windowWidth > 611 && (
+          <img
+          src="../assets/images/Fastone-pngLogo.png"
+          alt="Hero"
+          style={{ width: windowWidth > 990 ? '6%' : "10%", height: 'auto', paddingTop : "5px" }}
+      />
+        )}
+        
+        <p style={{ color: '#d1d5db', fontSize: '0.875rem' }}>
+          © 2024 FastOne Global Financial Markets. All rights reserved.
         </p>
       </div>
     </footer>

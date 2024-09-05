@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-const InfoSection = () => {
+const AccountSection = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
@@ -23,11 +23,6 @@ const InfoSection = () => {
         color: '#2d3748',
     };
 
-    const subheadingStyle = {
-        marginTop: '16px',
-        color: '#718096',
-    };
-
     const cardContainerStyle = {
         display: 'flex',
         flexDirection : windowWidth > 830 ? "row" : "column",
@@ -48,16 +43,15 @@ const InfoSection = () => {
         maxWidth: windowWidth > 830 ? '400px ' : null,
     };
 
-
     const greenCardStyle = {
         ...cardStyle,
-        background: 'linear-gradient(135deg, #48bb78, #da5600)',
+        background: 'linear-gradient(135deg, #48bb78, #00b6da)', // Gradient from one shade of green to another
         color: '#ffffff',
     };
-
+    
     const whiteCardStyle = {
         ...cardStyle,
-        background: 'linear-gradient(135deg, #48bb78, pink)',
+        background: 'linear-gradient(135deg, #48bb78, white)', 
         color: '#2d3748',
         border: '1px solid #e2e8f0',
     };
@@ -70,6 +64,7 @@ const InfoSection = () => {
 
     const cardTextStyle = {
         marginBottom: '24px',
+        color: 'white',
     };
 
     const buttonStyle = {
@@ -88,27 +83,17 @@ const InfoSection = () => {
         backgroundColor: '#f7fafc',
     };
 
-    const imageStyle = {
-        width: '64px',
-        height: '64px',
-    };
-
     return (
         <div style={sectionStyle}>
-            <div style={headingStyle}>
-                Trust. Confidence. Transparency.
-            </div>
-            <p style={subheadingStyle}>
-                Find out why so many CFD traders are choosing us.
-            </p>
+            <div style={headingStyle}>Open an account today</div>
 
             <div style={cardContainerStyle}>
-                {/* Card 1 */}
+                {/* Card 1 - Create an Account */}
                 <div style={greenCardStyle}>
                     <div>
-                        <h2 style={cardTitleStyle}>Compare our costs</h2>
+                        <h2 style={cardTitleStyle}>Create an account</h2>
                         <p style={cardTextStyle}>
-                            Keep your trading costs down with our tight spreads.
+                            Sign up, create an account and start trading on low spreads with us today.
                         </p>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -117,29 +102,36 @@ const InfoSection = () => {
                             onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                             onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
                         >
-                            Compare now
+                            Open an account
                         </button>
                         <img
-                            src="../assets/images/compare-prices.png.webp" // Replace with the actual image path
-                            alt="Cost comparison icon"
-                            style={imageStyle}
+                            src="../assets/images/open-account-on-black.png.webp" // Replace with the actual image path
+                            alt="Account icon"
+                            style={{ width: '64px', height: '64px' }}
                         />
                     </div>
                 </div>
 
-                {/* Card 2 */}
+                {/* Card 2 - Not Sure */}
                 <div style={whiteCardStyle}>
                     <div>
-                        <h2 style={cardTitleStyle}>
-                            Learn why traders made the move to us
-                        </h2>
-                        <p style={{ ...cardTextStyle, color: '#718096' }}>Trustpilot</p>
+                        <h2 style={{...cardTitleStyle, color : "black"}}>Not sure?</h2>
+                        <p style={{...cardTextStyle, color : "black"}}>
+                            Take our demo account for a spin in a risk-free environment.
+                        </p>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: "end", alignItems: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <button
+                            style={{ ...buttonStyle, backgroundColor: '#000', color: '#fff' }}
+                            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#333')}
+                            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#000')}
+                        >
+                            Try a demo
+                        </button>
                         <img
-                            src="../assets/images/eightcaplap-650x650.png.webp" // Replace with the actual image path
-                            alt="Trustpilot icon"
-                            style={imageStyle}
+                            src="../assets/images/small_box_illustrator_create_account.png" // Replace with the actual image path
+                            alt="Demo icon"
+                            style={{ width: '64px', height: '64px' }}
                         />
                     </div>
                 </div>
@@ -148,4 +140,4 @@ const InfoSection = () => {
     );
 };
 
-export default InfoSection;
+export default AccountSection;

@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import InfoSection from './Trust';
-import { BsQrCode } from "react-icons/bs";
+import { BsQrCode, BsList } from "react-icons/bs";
 import Popup from './Popup';
-import { useState } from 'react';
+import AccountSection from './Openacc';
+import TradeZoneSection from './TradeZone';
+import TrustedTrading from './TrustedTrading';
+import { IoClose } from "react-icons/io5";
 
 function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleQrButtonClick = () => {
         setIsPopupOpen(true);
@@ -14,6 +27,13 @@ function Home() {
     const handleClosePopup = () => {
         setIsPopupOpen(false);
     };
+
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    const isMobileView = windowWidth < 670;
+
     const styles = {
         container: {
             position: 'relative',
@@ -36,7 +56,6 @@ function Home() {
             filter: 'blur(9px)',
             zIndex: -1,
         },
-
         header: {
             display: 'flex',
             justifyContent: 'space-between',
@@ -45,6 +64,7 @@ function Home() {
             borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
             zIndex: 1,
             textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)',
+            position: 'relative',
         },
         logo: {
             fontSize: '32px',
@@ -80,16 +100,18 @@ function Home() {
         },
         main: {
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: windowWidth > 1180 ? 'space-between' : "center",
             alignItems: 'center',
             padding: '80px 20px',
-            maxWidth: '1200px',
+            maxWidth: windowWidth > 1180 ? '1200px' : null,
+            width: "100%",
             margin: '0 auto',
             zIndex: 1,
             flexWrap: 'wrap',
+            gap: "40px"
         },
         textSection: {
-            maxWidth: '500px',
+            maxWidth: windowWidth > 1180 ? '500px' : "900px",
             textShadow: '1px 1px 10px rgba(0, 0, 0, 0.7)',
             marginBottom: '20px',
         },
@@ -124,6 +146,7 @@ function Home() {
             boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
             textTransform: 'uppercase',
             letterSpacing: '1px',
+            fontFamily: 'Poppins, Arial, sans-serif',
         },
         createAccountButton: {
             backgroundColor: '#18e7f3',
@@ -147,133 +170,187 @@ function Home() {
         imageHover: {
             transform: 'scale(1.05)',
         },
+        sidebar: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '300px', // Slightly wider for better visibility
+            height: '100%',
+            background: 'linear-gradient(145deg, rgba(76, 40, 137, 0.9), rgba(24, 231, 243, 0.5))', // Gradient background
+            color: '#fff',
+            padding: '20px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)', // Enhanced shadow effect
+            transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)', // Sliding effect
+            transition: 'transform 0.5s ease-in-out', // Smooth transition for sliding
+            zIndex: 1001,
+            backdropFilter: 'blur(10px)', // Background blur for added depth
+            borderRight: '1px solid rgba(255, 255, 255, 0.2)', // Optional border effect
+            overflowY: 'auto', // Scroll if content is too long
+        },
+        sidebarLink: {
+            display: 'block',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '20px',
+            margin: '20px 0',
+            padding: '15px 10px',
+            borderRadius: '10px', // Rounded corners for the links
+            backgroundColor: 'rgba(0, 0, 0, 0.3)', // Semi-transparent background for links
+            transition: 'background-color 0.3s ease, padding-left 0.3s ease', // Smooth transition for hover effects
+        },
+        sidebarLinkHover: {
+            backgroundColor: 'rgba(24, 231, 243, 0.2)', // Subtle color change on hover
+            paddingLeft: '20px', // Left padding on hover
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)', // Adds a subtle shadow effect on hover
+        },
+        closeSidebar: {
+            fontSize: '24px',
+            cursor: 'pointer',
+            color: '#fff',
+            marginTop: '20px',
+            transition: 'background-color 0.3s ease, transform 0.3s ease', // Smooth hover effect for the close button
+        },
+        closeSidebarHover: {
+            backgroundColor: 'rgba(255, 255, 255, 0.3)', // Hover effect for the close button
+            transform: 'rotate(90deg)', // Rotate effect for close button on hover
+        },
+        hamburger: {
+            fontSize: "15px" // Hide hamburger for larger screens
+        },
+        '@media (max-width: 670px)': {
+            header: {
+                padding: '20px',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+            },
+            nav: {
+                display: 'none',
+            },
+            hamburger: {
+                display: 'block', // Show hamburger for mobile view
+            },
+        },
     };
 
     return (
         <div style={styles.container}>
             <div style={styles.background} />
-
             <header style={styles.header}>
-                <div style={styles.logo}>Adex</div>
-                <nav style={styles.nav}>
+                {isMobileView && (
+                    <nav style={styles.nav}>
+                        <div style={ {...styles.hamburger, fontSize: '30px'}} onClick={handleSidebarToggle}>
+                            <BsList />
+                        </div>
+                    </nav>
+                )}
+                <img
+                    src="../assets/images/Fastone-pngLogo.png"
+                    alt="Hero"
+                    style={{ width: windowWidth > 990 ? '5%' : "10%", height: 'auto', ...styles.imageHover }}
+                />
+                {!isMobileView && (
+                    <nav style={styles.nav}>
+                        {['Home', 'Trading', 'Tools', 'Insights', 'Talk to us'].map((item) => (
+                            <a
+                                key={item}
+                                href={`#${item.toLowerCase().replace(/\s+/g, '')}`}
+                                style={styles.navLink}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.querySelector('span').style.width = '100%';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.querySelector('span').style.width = '0%';
+                                }}
+                            >
+                                {item}
+                                <span style={styles.navLinkBefore}></span>
+                            </a>
+                        ))}
+                    </nav>
+                )}
+            </header>
+            {isMobileView && isSidebarOpen && (
+                <div style={styles.sidebar}>
+                    <button
+                        style={styles.closeSidebar}
+                        onClick={handleSidebarToggle}
+                        onMouseEnter={(e) => (e.currentTarget.style.transform = 'rotate(90deg)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.transform = 'rotate(0deg)')}
+                    >
+                        <IoClose />
+                    </button>
+
                     {['Home', 'Trading', 'Tools', 'Insights', 'Talk to us'].map((item) => (
                         <a
                             key={item}
                             href={`#${item.toLowerCase().replace(/\s+/g, '')}`}
-                            style={styles.navLink}
+                            style={styles.sidebarLink}
                             onMouseEnter={(e) => {
-                                e.currentTarget.querySelector('span').style.width = '100%';
+                                e.currentTarget.style.backgroundColor = 'rgba(24, 231, 243, 0.2)';
+                                e.currentTarget.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+                                e.currentTarget.style.paddingLeft = '20px';
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.querySelector('span').style.width = '0%';
+                                e.currentTarget.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                                e.currentTarget.style.paddingLeft = '10px';
                             }}
                         >
                             {item}
-                            <span style={{ ...styles.navLinkBefore }} />
                         </a>
                     ))}
-                </nav>
-            </header>
+                </div>
+            )}
 
             <main style={styles.main}>
-                <div style={styles.textSection}>
+                <section style={styles.textSection}>
                     <h1 style={styles.headline}>
-                        TRADE <span style={styles.highlight}>SMARTER</span>
+                        Discover the <span style={styles.highlight}>Best</span> Solutions
                     </h1>
                     <p style={styles.description}>
-                        Find your next opportunity on 800+ CFD markets with TradingView integration, daily trade ideas, professional trading insight, and code-free automation.
+                        Explore our range of services and find the perfect fit for your needs. Whether you're looking for a day pass or a dedicated office space, we have flexible options tailored for you.
                     </p>
                     <div style={styles.buttonContainer}>
                         <button
                             style={{ ...styles.button, ...styles.createAccountButton }}
-                            onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = '#fff';
-                                e.target.style.color = '#4c2889';
-                                e.target.style.transform = 'translateY(-3px)';
-                                e.target.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = '#18e7f3';
-                                e.target.style.color = '#4c2889';
-                                e.target.style.transform = 'translateY(0)';
-                                e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
-                            }}
+                            onClick={() => { }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
-                            Create Account
+                            Sign up
                         </button>
                         <button
                             style={{ ...styles.button, ...styles.loginButton }}
-                            onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = '#18e7f3';
-                                e.target.style.color = '#fff';
-                                e.target.style.transform = 'translateY(-3px)';
-                                e.target.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.4)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = '#fff';
-                                e.target.style.color = '#4c2889';
-                                e.target.style.transform = 'translateY(0)';
-                                e.target.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.3)';
-                            }}
+                            onClick={() => { }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
                             Login
                         </button>
-                            <button
-                                style={{
-                                    ...styles.button,
-                                    ...styles.loginButton,
-                                    backgroundColor: '#4c2889',
-                                    color: '#fff',
-                                    padding: '0.75rem 1.5rem',
-                                    fontSize: '1rem',
-                                    border: 'none',
-                                    borderRadius: '8px',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    gap: '0.5rem'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.target.style.backgroundColor = '#18e7f3';
-                                    e.target.style.color = '#4c2889';
-                                    e.target.style.transform = 'translateY(-3px)';
-                                    e.target.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.target.style.backgroundColor = '#4c2889';
-                                    e.target.style.color = '#fff';
-                                    e.target.style.transform = 'translateY(0)';
-                                    e.target.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
-                                }}
-                                onClick={handleQrButtonClick} // Open popup on click
-                            >
-                                QR <BsQrCode />
-                            </button>
-
                     </div>
-                </div>
-                <div
-                    style={styles.imageContainer}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.02)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1)';
-                    }}
-                >
-                    <img
-                        src="../assets/images/hero-slide-1.jpg"
-                        alt="Professional"
-                        style={{ width: '100%', height: 'auto' }}
-                    />
-                </div>
+                </section>
+                {windowWidth > 1180 && (
+                    <div style={styles.imageContainer}>
+                        <img
+                            src="../assets/images/hero-slide-1.jpg"
+                            alt="Hero"
+                            style={{ width: '100%', height: 'auto', ...styles.imageHover }}
+                        />
+                    </div>
+                )}
+
             </main>
-            {isPopupOpen && <Popup onClose={handleClosePopup}/>}
             <InfoSection />
+            <TradeZoneSection />
+            <AccountSection />
+            <TrustedTrading />
+            <button onClick={handleQrButtonClick} style={{ position: 'fixed', bottom: '20px', right: '20px', background: '#18e7f3', border: 'none', borderRadius: '100%', padding: '20px', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', zIndex: 1000 }}>
+                <BsQrCode style={{ color: '#fff', fontSize: '35px' }} />
+            </button>
+            {isPopupOpen && <Popup onClose={handleClosePopup} />}
         </div>
     );
 }
 
 export default Home;
+
