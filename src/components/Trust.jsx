@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 const InfoSection = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -7,12 +7,8 @@ const InfoSection = () => {
         const handleResize = () => setWindowWidth(window.innerWidth);
 
         window.addEventListener('resize', handleResize);
-
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-
-
 
     const sectionStyle = {
         backgroundColor: '#ffffff',
@@ -48,9 +44,14 @@ const InfoSection = () => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: '100%',
-        maxWidth: windowWidth > 830 ? '400px ' : null,
+        maxWidth: windowWidth > 830 ? '400px' : null,
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
     };
 
+    const cardHoverEffect = {
+        transform: 'translateY(-10px)',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
+    };
 
     const greenCardStyle = {
         ...cardStyle,
@@ -71,10 +72,6 @@ const InfoSection = () => {
         marginBottom: '16px',
     };
 
-    const cardTextStyle = {
-        marginBottom: '24px',
-    };
-
     const buttonStyle = {
         backgroundColor: '#ffffff',
         color: '#48bb78',
@@ -83,7 +80,7 @@ const InfoSection = () => {
         borderRadius: '9999px',
         cursor: 'pointer',
         border: 'none',
-        transition: 'background-color 0.3s ease',
+        transition: 'background-color 0.3s ease, transform 0.3s ease',
         fontFamily: 'Poppins, Arial, sans-serif',
     };
 
@@ -110,15 +107,13 @@ const InfoSection = () => {
                 <div style={greenCardStyle}>
                     <div>
                         <h2 style={cardTitleStyle}>Compare our costs</h2>
-                        <p style={cardTextStyle}>
-                            Keep your trading costs down with our tight spreads.
-                        </p>
+                        <p>Keep your trading costs down with our tight spreads.</p>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <button
-                        onClick={() => {
-                            window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
-                        }}
+                            onClick={() => {
+                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                            }}
                             style={buttonStyle}
                             onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                             onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
@@ -126,39 +121,43 @@ const InfoSection = () => {
                             Compare now
                         </button>
                         <img
-                            src="../assets/images/compare-prices.png.webp" // Replace with the actual image path
+                            src="../assets/images/compare-prices.png.webp"
                             alt="Cost comparison icon"
                             style={imageStyle}
                         />
                     </div>
                 </div>
 
-                {/* Card 2 */}
-                <div style={whiteCardStyle}>
+                {/* Card 2 - Launching this Diwali */}
+                <div
+                    style={{...whiteCardStyle, marginTop : "16px"}}
+                    onMouseEnter={(e) => Object.assign(e.currentTarget.style, cardHoverEffect)}
+                    onMouseLeave={(e) => Object.assign(e.currentTarget.style, cardStyle)}
+                >
                     <div>
                         <h2 style={cardTitleStyle}>
-                            Learn why traders made the move to us
+                            Launching this Diwali
                         </h2>
-                        <br />
+                        <p style={{ color: '#4e5866' }}>
+                            Be part of something big this festive season.
+                        </p>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <button
-                            style={{ ...buttonStyle, ...buttonHoverStyle }}
+                            style={buttonStyle}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                             onClick={() => {
                                 window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
                             }}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
                             Register Today
                         </button>
-                        <div style={{ display: 'flex', justifyContent: "end", alignItems: 'center' }}>
-                            <img
-                                src="../assets/images/eightcaplap-650x650.png.webp" // Replace with the actual image path
-                                alt="Trustpilot icon"
-                                style={imageStyle}
-                            />
-                        </div>
+                        <img
+                            src="../assets/images/favpng_diya.png"
+                            alt="Diwali icon"
+                            style={imageStyle}
+                        />
                     </div>
                 </div>
             </div>

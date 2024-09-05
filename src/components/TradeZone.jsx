@@ -13,7 +13,7 @@ const TradeZoneSection = () => {
 
     const sectionStyle = {
         backgroundColor: '#f7fafc',
-        padding: '80px 20px',
+        padding: '30px 20px',
         textAlign: 'center',
     };
 

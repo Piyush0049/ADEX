@@ -53,7 +53,7 @@ function Home() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '20px 40px',
+            padding: '20px 30px',
             borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
             zIndex: 1,
             textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)',
@@ -64,7 +64,7 @@ function Home() {
             fontWeight: 'bold',
             letterSpacing: '2px',
             textTransform: 'uppercase',
-            color: '#18e7f3',
+            color: '#176da8',
         },
         nav: {
             display: 'flex',
@@ -85,7 +85,7 @@ function Home() {
             height: '2px',
             bottom: '0',
             left: '0',
-            backgroundColor: '#18e7f3',
+            backgroundColor: '#176da8',
             transition: 'width 0.3s ease',
         },
         navLinkHoverBefore: {
@@ -116,7 +116,7 @@ function Home() {
             letterSpacing: '-1px',
         },
         highlight: {
-            color: '#18e7f3',
+            color: '#176da8',
         },
         description: {
             fontSize: '20px',
@@ -142,8 +142,8 @@ function Home() {
             fontFamily: 'Poppins, Arial, sans-serif',
         },
         createAccountButton: {
-            backgroundColor: '#18e7f3',
-            color: '#4c2889',
+            backgroundColor: '#176da8',
+            color: 'white',
         },
         loginButton: {
             backgroundColor: '#fff',
@@ -172,7 +172,7 @@ function Home() {
                 <img
                     src="../assets/images/Fastone-pngLogo.png"
                     alt="Hero"
-                    style={{ width: windowWidth > 990 ? '5%' : windowWidth > 682 ? "10%" : "15%", height: 'auto', ...styles.imageHover }}
+                    style={{ width: windowWidth > 990 ? '5%' : windowWidth > 682 ? "10%" : "20%", height: 'auto', ...styles.imageHover }}
                 />
 
             </header>
@@ -217,8 +217,7 @@ function Home() {
             <InfoSection />
             <TradeZoneSection />
             <AccountSection />
-            <TrustedTrading />
-            <button onClick={handleQrButtonClick} style={{ position: 'fixed', bottom: '20px', right: '20px', background: '#18e7f3', border: 'none', borderRadius: '100%', padding: '20px', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', zIndex: 1000 }}>
+            <button onClick={handleQrButtonClick} style={{ position: 'fixed', bottom: '20px', right: '20px', background: '#176da8', border: 'none', borderRadius: '100%', padding: '20px', cursor: 'pointer', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)', zIndex: 1000 }}>
                 <BsQrCode style={{ color: '#fff', fontSize: '35px' }} />
             </button>
             {isPopupOpen && <Popup onClose={handleClosePopup} />}

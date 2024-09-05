@@ -13,7 +13,7 @@ const AccountSection = () => {
 
     const sectionStyle = {
         backgroundColor: '#ffffff',
-        padding: '64px 32px',
+        padding: '60px 32px',
         textAlign: 'center',
     };
 
