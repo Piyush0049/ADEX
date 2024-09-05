@@ -18,8 +18,22 @@ const TrustedTrading = () => {
         textAlign: 'center',
     };
 
+    const headingStyle = {
+        fontSize: windowWidth > 560 ? '2.5rem' : "2rem",
+        paddingBottom : "40px",
+        fontWeight: 'bold',
+        color: '#2d3748',
+        marginBottom: '8px',
+    };
+
+    const subheadingStyle = {
+        color: '#718096',
+        fontSize: '1.125rem',
+        marginBottom: '48px',
+    };
+
     const cardStyle = {
-        background: 'linear-gradient(135deg, blue, yellow)',
+        background: 'linear-gradient(135deg, black, grey)', 
         color: '#ffffff',
         borderRadius: '15px',
         padding: '40px',
@@ -69,11 +83,6 @@ const TrustedTrading = () => {
         maxWidth: '300px',
         borderRadius: '10px',
     };
-    const headingStyle = {
-        fontSize: windowWidth > 560 ? '2.5rem' : "2rem",
-        fontWeight: 'bold',
-        color: '#2d3748',
-    };
 
     return (
         <div style={sectionStyle}>
@@ -81,7 +90,6 @@ const TrustedTrading = () => {
             Why Us?
             </div>
             <div style={cardStyle}>
-                {/* Left content of the card */}
                 <div style={cardContentStyle}>
                     <h3 style={cardHeadingStyle}>Trusted trading platforms</h3>
                     <p style={cardTextStyle}>

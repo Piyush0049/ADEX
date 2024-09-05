@@ -99,6 +99,9 @@ const AccountSection = () => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <button
                             style={buttonStyle}
+                            onClick={() => {
+                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                            }}
                             onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
                             onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#ffffff')}
                         >

@@ -50,16 +50,16 @@ const Footer = () => {
             title: 'Insights',
             links: ['Eightcap Labs', 'Trade Zone', 'Events & Webinars'],
           },
-          {
-            title: 'Follow us',
-            social: [
-              { icon: 'fab fa-facebook-f', link: '#' },
-              { icon: 'fab fa-twitter', link: '#' },
-              { icon: 'fab fa-linkedin-in', link: '#' },
-              { icon: 'fab fa-instagram', link: '#' },
-              { icon: 'fab fa-youtube', link: '#' },
-            ],
-          },
+          //{
+          //  title: 'Follow us',
+          //  social: [
+          //    { icon: 'fab fa-facebook-f', link: '#' },
+          //    { icon: 'fab fa-twitter', link: '#' },
+          //    { icon: 'fab fa-linkedin-in', link: '#' },
+          //    { icon: 'fab fa-instagram', link: '#' },
+          //    { icon: 'fab fa-youtube', link: '#' },
+          //  ],
+          //},
         ].map((section, index) => (
           <div key={index}>
             <h4

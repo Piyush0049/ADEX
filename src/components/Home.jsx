@@ -116,7 +116,7 @@ function Home() {
             marginBottom: '20px',
         },
         headline: {
-            fontSize: '60px',
+            fontSize: '55px',
             fontWeight: '800',
             lineHeight: '1.2',
             marginBottom: '20px',
@@ -174,18 +174,19 @@ function Home() {
             position: 'fixed',
             top: 0,
             left: 0,
-            width: '300px', // Slightly wider for better visibility
+            width: '300px',
             height: '100%',
-            background: 'linear-gradient(145deg, rgba(76, 40, 137, 0.9), rgba(24, 231, 243, 0.5))', // Gradient background
+            background: 'linear-gradient(145deg, rgba(76, 40, 137, 0.9), rgba(24, 231, 243, 0.5))',
             color: '#fff',
             padding: '20px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)', // Enhanced shadow effect
-            transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)', // Sliding effect
-            transition: 'transform 0.5s ease-in-out', // Smooth transition for sliding
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+            transform: isSidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
+            transition: 'transform 0.5s ease-in-out, opacity 0.3s ease', // Added opacity transition
             zIndex: 1001,
-            backdropFilter: 'blur(10px)', // Background blur for added depth
-            borderRight: '1px solid rgba(255, 255, 255, 0.2)', // Optional border effect
-            overflowY: 'auto', // Scroll if content is too long
+            backdropFilter: 'blur(10px)',
+            borderRight: '1px solid rgba(255, 255, 255, 0.2)',
+            overflowY: 'auto',
+            opacity: isSidebarOpen ? '1' : '0', // Added opacity for smooth fading
         },
         sidebarLink: {
             display: 'block',
@@ -238,7 +239,7 @@ function Home() {
             <header style={styles.header}>
                 {isMobileView && (
                     <nav style={styles.nav}>
-                        <div style={ {...styles.hamburger, fontSize: '30px'}} onClick={handleSidebarToggle}>
+                        <div style={{ ...styles.hamburger, fontSize: '30px' }} onClick={handleSidebarToggle}>
                             <BsList />
                         </div>
                     </nav>
@@ -246,7 +247,7 @@ function Home() {
                 <img
                     src="../assets/images/Fastone-pngLogo.png"
                     alt="Hero"
-                    style={{ width: windowWidth > 990 ? '5%' : "10%", height: 'auto', ...styles.imageHover }}
+                    style={{ width: windowWidth > 990 ? '5%' : windowWidth > 682 ?  "10%" : "15%", height: 'auto', ...styles.imageHover }}
                 />
                 {!isMobileView && (
                     <nav style={styles.nav}>
@@ -313,7 +314,9 @@ function Home() {
                     <div style={styles.buttonContainer}>
                         <button
                             style={{ ...styles.button, ...styles.createAccountButton }}
-                            onClick={() => { }}
+                            onClick={() => {
+                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                            }}
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
@@ -321,7 +324,9 @@ function Home() {
                         </button>
                         <button
                             style={{ ...styles.button, ...styles.loginButton }}
-                            onClick={() => { }}
+                            onClick={() => {
+                                window.open('https://docs.google.com/forms/d/e/1FAIpQLSc8lIZYQml5Q8QrENS99F80sWQeik9Nnl1Dk_KVHZvyQvXIEg/viewform', '_blank');
+                            }}
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         >
